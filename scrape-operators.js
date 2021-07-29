@@ -1,6 +1,9 @@
+const { write } = require('fast-csv');
 const fetch = require('node-fetch'),
   cheerio = require('cheerio'),
   cliProgress = require('cli-progress');
+
+const writeData = require("./handle-files");
 
 const multibar = new cliProgress.MultiBar({
   clearOnComplete: false,
@@ -34,7 +37,7 @@ function createGroups(arr, numGroups) {
 async function getInfoPages(list, promiseN) {
 
   let result = {
-    operators: new Set(),
+    distributions: new Set(),
     data: []
   };
 
@@ -65,7 +68,7 @@ async function getInfoPages(list, promiseN) {
     for (let j = 0; j < anchors.length; j++) {
       let distAnchor = anchors.eq(j);
       let distribution = removeText(distAnchor);
-      result.operators.add(distribution);
+      result.distributions.add(distribution);
       result.data[i].distributions.set(distribution, distAnchor.children("code").text().split(/\s+/));
     }
   }
@@ -85,18 +88,27 @@ async function main() {
     .map((chunk, index) => getInfoPages(chunk, index + 1)));
 
   multibar.stop();
-  console.log("Scraping Completed");
+  console.log("Scraping Completed!\n");
 
-  console.log("Processing results...");
+  const bar1 = new cliProgress.SingleBar({
+    format: 'Processing results [{bar}] {percentage}%'
+  }, cliProgress.Presets.legacy);
+  bar1.start(100, 0);
+
   let finalResult = data.reduce((prev, curr) => {
-    prev.operators = new Set([...prev.operators].concat([...curr.operators]));
+    prev.distributions = new Set([...prev.distributions].concat([...curr.distributions]));
     prev.data = prev.data.concat(curr.data);
     return prev;
-  }, { operators: new Set(), data: [] });
+  }, { distributions: new Set(), data: [] });
+  //console.log("Processing complete!");
+  // create a new progress bar instance and use shades_classic theme
+  bar1.update(50);
+  
 
   //files handling code goes here
+  writeData(finalResult, bar1);
 
-  console.log("Processing complete!");
+  //bar1.stop();
 }
 
 main();
