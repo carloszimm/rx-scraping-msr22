@@ -1,4 +1,3 @@
-const { write } = require('fast-csv');
 const fetch = require('node-fetch'),
   cheerio = require('cheerio'),
   cliProgress = require('cli-progress');
@@ -47,11 +46,11 @@ async function getInfoPages(list, promiseN) {
     const li = list.eq(i);
     const anchor = li.children("a");
 
-    bar.update(i + 1, { operator: anchor.text() });
+    bar.increment({ operator: anchor.text() });
 
     result.data.push({
       operator: anchor.text(),
-      url: anchor.attr("href"),
+      url: mainUrl + anchor.attr("href"),
       operatorInPage: "",
       distributions: new Map()
     });
@@ -68,6 +67,14 @@ async function getInfoPages(list, promiseN) {
     for (let j = 0; j < anchors.length; j++) {
       let distAnchor = anchors.eq(j);
       let distribution = removeText(distAnchor);
+
+      //fix inconsistencies
+      if (distribution === "RxJava 2x") {
+        distribution = "RxJava 2․x";
+      } else if (distribution === "RxNet") {
+        distribution = "RxNET";
+      }
+
       result.distributions.add(distribution);
       result.data[i].distributions.set(distribution, distAnchor.children("code").text().split(/\s+/));
     }
@@ -90,25 +97,24 @@ async function main() {
   multibar.stop();
   console.log("Scraping Completed!\n");
 
-  const bar1 = new cliProgress.SingleBar({
-    format: 'Processing results [{bar}] {percentage}%'
+  const bar = new cliProgress.SingleBar({
+    format: 'Processing results [{bar}] {percentage}%',
+    stopOnComplete: true
   }, cliProgress.Presets.legacy);
-  bar1.start(100, 0);
+  bar.on("stop", () => console.log(" Done"));
+
+  bar.start(100, 0);
 
   let finalResult = data.reduce((prev, curr) => {
     prev.distributions = new Set([...prev.distributions].concat([...curr.distributions]));
     prev.data = prev.data.concat(curr.data);
     return prev;
   }, { distributions: new Set(), data: [] });
-  //console.log("Processing complete!");
-  // create a new progress bar instance and use shades_classic theme
-  bar1.update(50);
-  
 
-  //files handling code goes here
-  writeData(finalResult, bar1);
+  bar.increment(7);
 
-  //bar1.stop();
+  //save results to file
+  writeData(finalResult, bar);
 }
 
 main();

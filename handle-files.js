@@ -11,14 +11,14 @@ function writeData(result, bar) {
 
   const csvStream = csv.format({ headers: true, writeBOM: true });
   csvStream
-    .pipe(fs.createWriteStream(path + `/result.csv`, { encoding: 'utf-8' }))
+    .pipe(fs.createWriteStream(path + '/result.csv', { encoding: 'utf-8' }))
     .on('finish', () => {
-      bar.update(100);
-      bar.stop();
+      bar.increment(7);
     });
 
-  result.data.forEach(val => {
+  let opsByDistribution = new Map();
 
+  result.data.forEach(val => {
     let data = [
       ["Operator", val.operator],
       ["URL", val.url],
@@ -26,15 +26,31 @@ function writeData(result, bar) {
     ];
 
     result.distributions.forEach(dist => {
+      if (!opsByDistribution.has(dist)) {
+        opsByDistribution.set(dist, new Set());
+      }
       let ops = val.distributions.get(dist) || [];
+      ops.forEach(val => opsByDistribution.get(dist).add(val));
       ops = ops.join("; ");
       data.push([dist, ops]);
     });
-    
+
     csvStream.write(data);
   });
 
   csvStream.end();
+
+  writeDataByDistribution(opsByDistribution, bar);
+}
+
+function writeDataByDistribution(opsByDistribution, bar) {
+  opsByDistribution.forEach((val, key) => {
+    fs.writeFile(path + `/${key}.txt`, [...val].sort().join("\n").trim(), (err) => {
+      if (err) throw err;
+      bar.increment(7);
+    })
+  })
+
 }
 
 module.exports = writeData;
