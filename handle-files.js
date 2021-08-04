@@ -1,17 +1,23 @@
-const fs = require("fs"),
-  csv = require('fast-csv');
+const fs = require('fs'),
+  csv = require('fast-csv'),
+  path = require('path');
 
-const path = __dirname + "/data";
+const baseDir = __dirname + path.sep + "result";
 
 function writeData(result, bar) {
+  let dir = baseDir + path.sep + new Date().toISOString().replace("T", " ").replace(/:/g, "-");
+
   // checks directory existence
-  if (!fs.existsSync(path)) {
-    fs.mkdirSync(path);
+  if (!fs.existsSync(baseDir)) {
+    fs.mkdirSync(baseDir);
+  }
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir);
   }
 
   const csvStream = csv.format({ headers: true, writeBOM: true });
   csvStream
-    .pipe(fs.createWriteStream(path + '/result.csv', { encoding: 'utf-8' }))
+    .pipe(fs.createWriteStream(dir + path.sep + 'summary.csv', { encoding: 'utf-8' }))
     .on('finish', () => {
       bar.increment(7);
     });
@@ -22,7 +28,7 @@ function writeData(result, bar) {
     let data = [
       ["Operator", val.operator],
       ["URL", val.url],
-      ["Operator in Page", val.operatorInPage]
+      ["Operator(URL)", val.operatorInPage]
     ];
 
     result.distributions.forEach(dist => {
@@ -40,15 +46,17 @@ function writeData(result, bar) {
 
   csvStream.end();
 
-  writeDataByDistribution(opsByDistribution, bar);
+  writeDataByDistribution(opsByDistribution, dir, bar);
 }
 
-function writeDataByDistribution(opsByDistribution, bar) {
+function writeDataByDistribution(opsByDistribution, dir, bar) {
   opsByDistribution.forEach((val, key) => {
-    fs.writeFile(path + `/${key}.txt`, [...val].sort().join("\n").trim(), (err) => {
-      if (err) throw err;
-      bar.increment(7);
-    })
+    fs.writeFile(dir + path.sep + key + '.txt',
+      [...val].sort((a, b) => a.localeCompare(b, undefined, { sensitivity: 'base' })).join("\n").trim(),
+      err => {
+        if (err) throw err;
+        bar.increment(7);
+      })
   })
 
 }
