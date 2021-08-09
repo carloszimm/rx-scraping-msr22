@@ -30,9 +30,11 @@ The [result folder](https://github.com/carloszimm/rxoperators-scraping/tree/main
 ## Implementation Notes
 The script breaks the operators' list in 4 parts and assign a different promise for each part, aiming to improve the script performance by parallelizing the work. The progress of
 the scraping can be checked out by progress bars shown in the console:
+
 ![progress_bar1](https://user-images.githubusercontent.com/4553211/128657575-6f8e1a07-3dfa-4ab6-82b8-f98ce9adaa52.png)
 
 The last execution yielded a total of **454** operators listed on the ReactiveX docs.
 
 After scraping the operators, the result is processed and the files written:
+
 ![progress_bar2](https://user-images.githubusercontent.com/4553211/128657483-9028f076-7753-42a8-88b9-5913f512c92a.png)
