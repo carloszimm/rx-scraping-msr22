@@ -1,11 +1,12 @@
 const fs = require('fs'),
   csv = require('fast-csv'),
-  path = require('path');
+  path = require('path'),
+  { DateTime } = require("luxon");
 
 const baseDir = __dirname + path.sep + "result";
 
 function writeData(result, bar) {
-  let dir = baseDir + path.sep + new Date().toISOString().replace("T", " ").replace(/:/g, "-");
+  const dir = baseDir + path.sep + DateTime.now().toISO({ format: 'basic', includeOffset: false });
 
   // checks directory existence
   if (!fs.existsSync(baseDir)) {
