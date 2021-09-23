@@ -15,7 +15,7 @@ npm install
 
 ## Usage
 ```terminal
-node scrape-operators
+node scrape
 ```
 
 ## Results
