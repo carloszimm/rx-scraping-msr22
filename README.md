@@ -5,6 +5,7 @@ The following sources are currently scraped:
 * http://reactivex.io/ (ReactiveX website)
 * https://github.com/ReactiveX/rxdart/ (RxDart repository)
 * https://github.com/ReactiveX/RxGo/ (RxGo repository)
+* https://github.com/ReactiveX/RxJava (RxJava repository)
 * https://github.com/ReactiveX/rxjs/ (RxJS repository)
 
 ## Installation
