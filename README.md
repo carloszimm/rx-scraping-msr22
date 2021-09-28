@@ -7,6 +7,7 @@ The following sources are currently scraped:
 * https://github.com/ReactiveX/RxGo/ (RxGo repository)
 * https://github.com/ReactiveX/RxJava (RxJava repository)
 * https://github.com/ReactiveX/rxjs/ (RxJS repository)
+* https://github.com/ReactiveX/RxKotlin (RxKotlin repository)
 
 ## Installation
 After cloning, install the dependencies before the first usage 
