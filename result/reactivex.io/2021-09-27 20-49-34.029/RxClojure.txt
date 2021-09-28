@@ -1,7 +1,4 @@
-BlockingObservable.blocking
-BlockingObservable.doseq
-BlockingObservable.into
-BlockingObservable.seq
+blocking
 cache
 catch*
 concat
@@ -11,6 +8,7 @@ count
 cycle
 distinct
 do
+doseq
 drop
 drop-while
 empty

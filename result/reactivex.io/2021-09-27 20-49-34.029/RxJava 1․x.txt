@@ -8,11 +8,6 @@ averageDouble
 averageFloat
 averageInteger
 averageLong
-BlockingObservable.forEach
-BlockingObservable.from
-BlockingObservable.getIterator
-BlockingObservable.toFuture
-BlockingObservable.toIterable
 buffer
 byLine
 cache
@@ -66,6 +61,7 @@ fromAction
 fromCallable
 fromFunc0
 fromRunnable
+getIterator
 groupBy
 groupJoin
 ifThen
@@ -120,12 +116,11 @@ skip
 skipLast
 skipUntil
 skipWhile
+split
 start
 startFuture
 startWith
-StringObervable.split
-StringObservable.join
-StringObservable.stringConcat
+stringConcat
 subscribe
 subscribeOn
 sumDouble
@@ -152,6 +147,8 @@ timer
 timestamp
 toAsync
 toBlocking
+toFuture
+toIterable
 toList
 toMap
 toMultiMap

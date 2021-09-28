@@ -1,13 +1,15 @@
 const scrapeRxDoc = require("./lib/reactivex.io/scrape-operators"),
   scrapeRxGo = require("./lib/rxgo/scrape-operators"),
   scrapeRxDart = require("./lib/rxdart/scrape-operators"),
-  scrapeRxJS = require("./lib/rxjs/scrape-operators");
+  scrapeRxJS = require("./lib/rxjs/scrape-operators"),
+  scrapeRxJava = require("./lib/rxjava/scrape-operators");
 
 async function main() {
-  await scrapeRxDoc();
-  await scrapeRxDart();
-  await scrapeRxGo();
+  scrapeRxDoc();
+  scrapeRxDart();
+  scrapeRxGo();
   scrapeRxJS();
+  scrapeRxJava();
 }
 
 main();

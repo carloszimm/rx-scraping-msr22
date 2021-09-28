@@ -3,11 +3,6 @@
 ++
 amb
 apply
-BlockingObservable.foreach
-BlockingObservable.toFuture
-BlockingObservable.toIterable
-BlockingObservable.toList
-BlockingObservable.withFilter
 cache
 collect
 combineLatest
@@ -54,6 +49,7 @@ flatten
 flattenDelayError
 foldLeft
 forall
+foreach
 forEach
 from
 groupBy
@@ -131,6 +127,7 @@ to
 toArray
 toBlocking
 toBuffer
+toFuture
 toIndexedSeq
 toIterable
 toIterator
