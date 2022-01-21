@@ -5,15 +5,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/carloszimm/rxoperators-scraping.git"
-  },
-  "author": "Carlos Zimmerle",
-  "bugs": {
-    "url": "https://github.com/carloszimm/rxoperators-scraping/issues"
-  },
-  "homepage": "https://github.com/carloszimm/rxoperators-scraping#readme",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0-rc.10",
     "cli-progress": "^3.9.1",
