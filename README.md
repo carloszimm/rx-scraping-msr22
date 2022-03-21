@@ -10,7 +10,7 @@ The following sources are currently scraped:
 * https://github.com/ReactiveX/rxjs/ (RxJS repository)
 * https://github.com/ReactiveX/RxKotlin (RxKotlin repository)
 
-For the purposes of the paper, only the operators of RxJava (RxJava repository), RxJS (RxJS repository), and RxSwift(ReactiveX website) were used.
+For the purposes of the paper, only the operators of **RxJava** (RxJava repository), **RxJS** (RxJS repository), and **RxSwift** (ReactiveX website) were utilized.
 
 ## Installation
 After cloning, install the dependencies before the first usage 
