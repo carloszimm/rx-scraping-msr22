@@ -1,5 +1,6 @@
 # ReactiveX Operators Scraping
-Provides a script to scrape the information about ReactiveX operators from official Rx Distribuition sources.
+Provides a script to scrape the information about ReactiveX operators from official Rx Distribuition sources. Scripts used for the paper:
+> Mining the Usage of Reactive Programming APIs: A Mining Study on GitHub and Stack Overflow.
 
 The following sources are currently scraped:
 * http://reactivex.io/ (ReactiveX website)
@@ -8,6 +9,8 @@ The following sources are currently scraped:
 * https://github.com/ReactiveX/RxJava (RxJava repository)
 * https://github.com/ReactiveX/rxjs/ (RxJS repository)
 * https://github.com/ReactiveX/RxKotlin (RxKotlin repository)
+
+For the purposes of the paper, only the operators of RxJava (RxJava repository), RxJS (RxJS repository), and RxSwift(ReactiveX website) were used.
 
 ## Installation
 After cloning, install the dependencies before the first usage 
