@@ -6,10 +6,10 @@ const scrapeRxDoc = require("./lib/reactivex.io/scrape-operators"),
   scrapeRxKotlin = require("./lib/rxkotlin/scrape-operators");
 
 async function main() {
-  scrapeRxDoc();
-  scrapeRxDart();
-  scrapeRxGo();
-  scrapeRxJS();
+  await scrapeRxDoc();
+  await scrapeRxDart();
+  await scrapeRxGo();
+  await scrapeRxJS();
   const rxJavaOpertors = await scrapeRxJava();
   scrapeRxKotlin(rxJavaOpertors);
 }
