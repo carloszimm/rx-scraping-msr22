@@ -1,5 +1,6 @@
 # ReactiveX Operators Scraping
-Provides a script to scrape the information about ReactiveX operators from official Rx Distribuition sources. Scripts used for the paper:
+Provides a script to scrape the information about ReactiveX operators from official Rx Distribuition sources.
+Scripts used for the following paper during the 19th International Conference on Mining Software Repositories (MSR '22):
 > Mining the Usage of Reactive Programming APIs: A Mining Study on GitHub and Stack Overflow.
 
 The following sources are currently scraped:
