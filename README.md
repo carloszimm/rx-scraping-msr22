@@ -17,6 +17,9 @@ The following sources are currently scraped (extracted):
 
 For the purposes of the paper, only the operators of **RxJava** (RxJava repository), **RxJS** (RxJS repository), and **RxSwift** (ReactiveX website) were utilized.
 
+## Requirements
+The script relies on Node.js to execute it. Therefore, the **Node.js v14.17.5 or superior** must be installed.
+
 ## Installation
 After cloning, install the dependencies before the first usage 
 ```terminal
